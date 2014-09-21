@@ -35,29 +35,17 @@
 
 + (BOOL)heardNothing:(NSString *)input
 {
-    if ([input length] == 0) {
-        return true;
-    }
-    if ([[input stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] length] == 0) {
-        return true;
-    }
-    return false;
+    return ([input length] == 0 || [[input stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] length] == 0);
 }
 
 + (BOOL)heardRage:(NSString *)input
 {
-    if ([[input uppercaseString] isEqualToString:input] && ![[input lowercaseString] isEqualToString:input]) {
-        return true;
-    }
-    return false;
+    return ([[input uppercaseString] isEqualToString:input] && ![[input lowercaseString] isEqualToString:input]);
 }
 
 + (BOOL)hasAnswerForQuestion:(NSString *)input
 {
-    if ([[input substringFromIndex:[input length] - 1] isEqualToString:@"?"]) {
-        return true;
-    }
-    return false;
+    return [[input substringFromIndex:[input length] - 1] isEqualToString:@"?"];
 }
 
 @end
