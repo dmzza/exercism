@@ -21,23 +21,43 @@
 
 - (NSString *)hey:(NSString *)input
 {
-    if ([input length] == 0) {
+    if ([Bob heardNothing:input]) {
         return @"Fine, be that way.";
     }
-    
-    NSString *response;
-    
-    if ([[input uppercaseString] isEqualToString:input] && ![[input lowercaseString] isEqualToString:input]) {
-        response = @"Woah, chill out!";
-    } else if ([[input substringFromIndex:[input length] - 1] isEqualToString:@"?"]) {
-        response = @"Sure.";
-    } else if ([[input stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] length] == 0) {
-        response = @"Fine, be that way.";
-    } else {
-        response = @"Whatever.";
+    if ([Bob heardRage:input]) {
+        return @"Woah, chill out!";
     }
-    
-    return response;
+    if ([Bob hasAnswerForQuestion:input]) {
+        return @"Sure.";
+    }
+    return @"Whatever.";
+}
+
++ (BOOL)heardNothing:(NSString *)input
+{
+    if ([input length] == 0) {
+        return true;
+    }
+    if ([[input stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] length] == 0) {
+        return true;
+    }
+    return false;
+}
+
++ (BOOL)heardRage:(NSString *)input
+{
+    if ([[input uppercaseString] isEqualToString:input] && ![[input lowercaseString] isEqualToString:input]) {
+        return true;
+    }
+    return false;
+}
+
++ (BOOL)hasAnswerForQuestion:(NSString *)input
+{
+    if ([[input substringFromIndex:[input length] - 1] isEqualToString:@"?"]) {
+        return true;
+    }
+    return false;
 }
 
 @end
